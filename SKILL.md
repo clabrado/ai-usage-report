@@ -28,35 +28,35 @@ Read the block between `PLAN_CONFIG_START` and `PLAN_CONFIG_END` above.
 
 ### Setup Mode
 
-Call `EnterPlanMode` first. Then ask TWO questions using `AskUserQuestion`:
+Call `EnterPlanMode` first. Then ask BOTH questions in a SINGLE `AskUserQuestion` call (so the user answers everything at once):
 
-**Question 1:** "Which Claude plan(s) do you have, and which config directories do they cover?"
-Options:
-- Max 20x personal only (200 USD/mo, all dirs)
-- Max 5x personal only (100 USD/mo, all dirs)
-- Pro personal only (20 USD/mo, all dirs)
-- Max 20x personal + Teams/Enterprise for work
-- Max 5x personal + Teams/Enterprise for work
-- Other (describe in notes)
+**Question 1:** "Which personal Claude plan do you have?"
+Options (max 4):
+- Max 20x (200 USD/mo)
+- Max 5x (100 USD/mo)
+- Pro (20 USD/mo)
+- No personal plan
 
-**Question 2 (only ask if they have Teams/Enterprise):** "What is your Teams or Enterprise monthly budget?"
-Options:
-- 100 USD/mo
-- 200 USD/mo
-- 500 USD/mo
-- Other (describe in notes)
+**Question 2:** "Do you have a Teams or Enterprise plan for work — and if so, what is the monthly budget?"
+Options (max 4):
+- Yes — 100 USD/mo
+- Yes — 200 USD/mo
+- Yes — 500 USD/mo
+- No Teams/Enterprise plan
 
-Do NOT ask them to type in notes for the budget — always present discrete options. Only fall back to "Other / describe in notes" as the last option.
+After both answers come back, call `ExitPlanMode`, then save config and run Report Mode immediately.
 
-After the user answers, call `ExitPlanMode` to approve the plan, then save their plan configuration by editing this SKILL.md file — replace the contents between `PLAN_CONFIG_START` and `PLAN_CONFIG_END` with a structured plain-text summary. Use "USD" not dollar signs to avoid rendering issues. Example:
+Save the config between `PLAN_CONFIG_START` and `PLAN_CONFIG_END`. Use "USD" not dollar signs. Example:
 
 ```
 Plans:
-- .claude-work + .claude: NNN USD/mo Teams/Enterprise (user-provided)
 - .claude-eco: Max 20x (200 USD/mo)
+- .claude + .claude-work: Teams/Enterprise (100 USD/mo)
 ```
 
-Then immediately proceed to **Report Mode** using those answers — do not make the user invoke the skill again.
+If the user selected "No personal plan" or "No Teams/Enterprise plan", omit that line.
+
+Then immediately proceed to **Report Mode** — do not make the user invoke the skill again.
 
 ---
 
