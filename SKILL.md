@@ -28,15 +28,25 @@ Read the block between `PLAN_CONFIG_START` and `PLAN_CONFIG_END` above.
 
 ### Setup Mode
 
-Call `EnterPlanMode` first. Then ask the user these questions:
+Call `EnterPlanMode` first. Then ask TWO questions using `AskUserQuestion`:
 
-1. Which Claude plan(s) do you have, and which config directory does each cover?
-   - Known fixed prices (do not ask the user for these):
-     - Pro: 20 USD/mo
-     - Max 5x: 100 USD/mo
-     - Max 20x: 200 USD/mo
-   - For **Teams or Enterprise**: the monthly budget varies — ask the user for the exact dollar amount. Do not assume any default.
-2. If you have a Teams or Enterprise plan: what is your exact monthly budget in USD?
+**Question 1:** "Which Claude plan(s) do you have, and which config directories do they cover?"
+Options:
+- Max 20x personal only (200 USD/mo, all dirs)
+- Max 5x personal only (100 USD/mo, all dirs)
+- Pro personal only (20 USD/mo, all dirs)
+- Max 20x personal + Teams/Enterprise for work
+- Max 5x personal + Teams/Enterprise for work
+- Other (describe in notes)
+
+**Question 2 (only ask if they have Teams/Enterprise):** "What is your Teams or Enterprise monthly budget?"
+Options:
+- 100 USD/mo
+- 200 USD/mo
+- 500 USD/mo
+- Other (describe in notes)
+
+Do NOT ask them to type in notes for the budget — always present discrete options. Only fall back to "Other / describe in notes" as the last option.
 
 After the user answers, call `ExitPlanMode` to approve the plan, then save their plan configuration by editing this SKILL.md file — replace the contents between `PLAN_CONFIG_START` and `PLAN_CONFIG_END` with a structured plain-text summary. Use "USD" not dollar signs to avoid rendering issues. Example:
 
