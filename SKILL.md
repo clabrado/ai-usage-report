@@ -31,7 +31,10 @@ Read the block between `PLAN_CONFIG_START` and `PLAN_CONFIG_END` above.
 Call `EnterPlanMode` first. Then ask the user these questions:
 
 1. Which Claude plan(s) do you have, and which config directory does each cover?
-   - Known fixed prices (do not ask the user for these): Pro = $20/mo, Max = $100/mo, Max 5x = $200/mo
+   - Known fixed prices (do not ask the user for these):
+     - Pro: $20/mo
+     - Max 5x: $100/mo
+     - Max 20x: $200/mo
    - For **Teams or Enterprise**: the monthly budget varies — ask the user for the exact dollar amount. Do not assume any default.
 2. If you have a Teams or Enterprise plan: what is your exact monthly budget in USD?
 
@@ -40,7 +43,7 @@ After the user answers, call `ExitPlanMode` to approve the plan, then save their
 ```
 Plans:
 - .claude-work + .claude: $NNN/mo Teams/Enterprise budget (user-provided)
-- .claude-eco: $200/mo Max 5x
+- .claude-eco: Max 20x ($200/mo)
 ```
 
 Then immediately proceed to **Report Mode** using those answers — do not make the user invoke the skill again.
