@@ -31,15 +31,15 @@ Read the block between `PLAN_CONFIG_START` and `PLAN_CONFIG_END` above.
 Call `EnterPlanMode` first. Then ask the user these questions:
 
 1. How many Claude plans do you pay for? (e.g. one Max subscription, one enterprise seat, both)
-2. For each plan: what is the monthly cost in USD, and which Claude config directory or account does it cover? (e.g. `.claude-work = $100/mo enterprise`, `.claude-eco = $200/mo Max`)
-3. Are you on a team/enterprise account with a monthly token budget? If so, what is the budget and what does it cover?
+2. For each plan: what is the monthly cost in USD, and which Claude config directory or account does it cover? (e.g. `.claude-eco = $200/mo Max`)
+3. If you are on a team or enterprise account: what is your exact monthly token budget in USD? Do not assume any default — ask the user to state the number explicitly.
 
 After the user answers, call `ExitPlanMode` to approve the plan, then save their plan configuration by editing this SKILL.md file — replace the contents between `PLAN_CONFIG_START` and `PLAN_CONFIG_END` with a structured summary of their answers, for example:
 
 ```
 Plans:
-- .claude-work + .claude: $100/mo enterprise budget
-- .claude-eco: $200/mo Max plan
+- .claude-work + .claude: $NNN/mo enterprise budget (user-provided)
+- .claude-eco: $NNN/mo Max plan
 ```
 
 Then immediately proceed to **Report Mode** using those answers — do not make the user invoke the skill again.
